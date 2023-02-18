@@ -19,8 +19,14 @@ class Bundix
         uri.password = nil
       end
 
+      open_args = [uri.to_s, 'r', 0600]
+
+      unless [nil, 'file'].include?(uri.scheme)
+        open_args <<= open_options
+      end
+
       begin
-        URI.open(uri.to_s, 'r', 0600, open_options) do |net|
+        URI.open(*open_args) do |net|
           File.open(file, 'wb+') { |local|
             File.copy_stream(net, local)
           }
