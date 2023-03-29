@@ -33,6 +33,7 @@ class Bundix
             File.open(file, 'wb+') { |local|
               File.copy_stream(net, local)
             }
+          end
         end
 
         Net::HTTP.start(uri.host, uri.port, use_ssl: (uri.scheme == 'https')) do |http|
