@@ -7,6 +7,7 @@ class Bundix
     def download(file, url)
       warn "Downloading #{file} from #{url}"
       uri = URI(url)
+      open_options = {}
 
       case uri.scheme
       when nil # local file path
